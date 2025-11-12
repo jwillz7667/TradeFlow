@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 type LogLevel = 'debug' | 'info' | 'warn' | 'error';
 
 function log(level: LogLevel, message: string, meta?: Record<string, unknown>) {
