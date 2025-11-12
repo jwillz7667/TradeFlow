@@ -6,7 +6,7 @@ import { rateLimit } from '@/lib/rate-limit';
 import { HttpError } from '@/lib/errors';
 import { getStripeClient, getUnitClient } from '@/lib/finance';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 export async function POST(req: NextRequest) {
   try {
