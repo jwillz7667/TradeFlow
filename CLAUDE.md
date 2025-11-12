@@ -211,6 +211,10 @@ NEXT_PUBLIC_POSTHOG_HOST
 
 - **Platform**: Vercel (recommended) or any Next.js 14 host
 - **Database**: Supabase (managed Postgres with RLS)
+- **Build Configuration**:
+  - App uses placeholder Clerk key (`pk_test_placeholder`) during build if env vars not set
+  - This allows static generation to succeed without requiring all secrets at build time
+  - Real API keys required at runtime for actual functionality
 - **Inngest**: Configure webhook URL at `https://yourdomain.com/api/inngest` in Inngest dashboard
 - **Clerk**: Set webhook URL for user.created events to sync `users` table
 - **Stripe**: Configure webhook endpoint at `/api/v1/finance/webhook/stripe`
