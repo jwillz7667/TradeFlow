@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       : 'test_publishable_key');
 
   return (
-    <ClerkProvider publishableKey={clerkKey} appearance={{ baseTheme: 'dark' }}>
+    <ClerkProvider publishableKey={clerkKey}>
       <html lang="en" className={inter.className}>
         <body>
           <SupabaseProvider>{children}</SupabaseProvider>

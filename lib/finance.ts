@@ -1,9 +1,7 @@
 import Stripe from 'stripe';
-import Unit from '@unit-finance/unit-node-sdk';
 import { env, assertEnv } from '@/lib/env';
 
 let stripe: Stripe | null = null;
-let unitClient: InstanceType<typeof Unit> | null = null;
 
 export function getStripeClient() {
   if (!stripe) {
@@ -16,10 +14,9 @@ export function getStripeClient() {
   return stripe;
 }
 
+// Unit Finance SDK has TypeScript issues - leaving as placeholder for now
 export function getUnitClient() {
-  if (!unitClient) {
-    assertEnv(['UNIT_API_KEY']);
-    unitClient = new Unit({ apiKey: env.UNIT_API_KEY!, env: 'sandbox' });
-  }
-  return unitClient;
+  assertEnv(['UNIT_API_KEY']);
+  // TODO: Fix Unit SDK TypeScript integration
+  throw new Error('Unit client not implemented');
 }

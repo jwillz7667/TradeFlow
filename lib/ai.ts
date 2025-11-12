@@ -8,9 +8,9 @@ export async function runComplianceAudit(input: {
 }) {
   const client = getOpenAIClient();
 
-  const completion = await client.responses.create({
+  const completion = await client.chat.completions.create({
     model: 'gpt-4o-mini',
-    input: [
+    messages: [
       {
         role: 'system',
         content: COMPLIANCE_AUDIT_PROMPT
@@ -19,16 +19,17 @@ export async function runComplianceAudit(input: {
         role: 'user',
         content: JSON.stringify(input)
       }
-    ]
+    ],
+    response_format: { type: 'json_object' }
   });
 
-  const raw = completion.output?.[0];
-  if (!raw || raw.type !== 'output_text') {
+  const raw = completion.choices[0]?.message?.content;
+  if (!raw) {
     throw new Error('Invalid AI payload');
   }
 
   try {
-    return JSON.parse(raw.text);
+    return JSON.parse(raw);
   } catch (error) {
     throw new Error('Failed to parse AI response');
   }
